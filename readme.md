@@ -13,6 +13,7 @@ option two train it yourself
     
     
     create virtual env name chatbotenv
+    and activate the virtual env
     navigate to chat-bot-server folder
     install requiremrnts .txt
     then 
