@@ -3,3 +3,5 @@ transformers
 scikit-learn==1.3.2
 fastapi
 uvicorn
+tqdm
+requests
