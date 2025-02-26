@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "642512934996",
+    "firebase_url": "https://smartpot-kashyap-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "smartpot-kashyap",
+    "storage_bucket": "smartpot-kashyap.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642512934996:android:067b09db860670675675c1",
+        "android_client_info": {
+          "package_name": "com.anonymous.SmartPot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl7hluNOAKDDBiSt2uUN17tMCuxRrdzns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642512934996:android:4376cd727fcc5cf65675c1",
+        "android_client_info": {
+          "package_name": "com.example.smartpot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl7hluNOAKDDBiSt2uUN17tMCuxRrdzns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
