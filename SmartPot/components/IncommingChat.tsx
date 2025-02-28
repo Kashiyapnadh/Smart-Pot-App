@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     minHeight: "7%",
     justifyContent: "flex-start", // Align content to the left
     alignItems: "center",
+    marginTop:"2%"
   },
   bubbleStyle: {
     backgroundColor: "orange",

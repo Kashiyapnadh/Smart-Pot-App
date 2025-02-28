@@ -1,18 +1,31 @@
 import { useState } from "react";
-import { View, StyleSheet, TextInput, Text, Pressable } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Pressable,
+  Keyboard,
+} from "react-native";
 import { IPAddress } from "@/state/store";
 
 export default function Settings() {
-    const[inputIP,setInputIP] = useState("")
-    const IP = IPAddress.useState(s => s.IPAddress)
+  const [inputIP, setInputIP] = useState("");
+  const IP = IPAddress.useState((s) => s.IPAddress);
 
   return (
     <View style={styles.backgroundWrapper}>
       <Text style={styles.textStyles}>Enter The IP:</Text>
       <TextInput onChangeText={setInputIP} style={styles.textinputStyles} />
-      <Pressable 
-      onPress={()=>IPAddress.update(s=>{s.IPAddress = inputIP})}
-      style={styles.buttonStyles}>
+      <Pressable
+        onPress={() => {
+          IPAddress.update((s) => {
+            s.IPAddress = inputIP;
+          });
+          Keyboard.dismiss();
+        }}
+        style={styles.buttonStyles}
+      >
         <Text style={styles.buttonTextStyles}>Set</Text>
       </Pressable>
     </View>
