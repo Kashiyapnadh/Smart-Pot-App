@@ -8,12 +8,15 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import * as Speech from "expo-speech";
 import { IPAddress } from "@/state/store";
 
+import { LoadingState } from "@/state/store";
+
 import IncommingChat from "@/components/IncommingChat";
 import OutgoingChat from "@/components/OutgoingChat";
+
+import SendIconCustom from "@/components/SendIconCustom";
 
 const renderItem = ({ type, message }: { type: string; message: string }) => {
   if (type == "in") {
@@ -29,7 +32,24 @@ export default function Chat() {
   const [message, setMessage] = useState("");
 
   type MessageDataType = { type: string; message: string }[] | null;
-  const [messageData, setMessageData] = useState<MessageDataType>(null);
+  const [messageData, setMessageData] = useState<MessageDataType>(
+    [
+      { "type": "out", "message": "Hi!" },
+      { "type": "in", "message": "Hey! How's it going?" },
+      { "type": "out", "message": "Pretty good! Just working on a project. You?" },
+      { "type": "in", "message": "Same here! What kind of project?" },
+      { "type": "out", "message": "A mobile app for plant care. Trying to add a chatbot to it." },
+      { "type": "in", "message": "That sounds awesome! Need any help?" },
+      { "type": "out", "message": "Maybe! I'm figuring out how to handle sensor data properly." },
+      { "type": "in", "message": "Are you using any database for storing the data?" },
+      { "type": "out", "message": "Yeah, I'm using Supabase for real-time updates." },
+      { "type": "in", "message": "Nice choice! Are you also integrating notifications?" },
+
+    ]
+    
+    
+
+  );
 
   const sendToLLM = async (message: string) => {
     setMessageData((prev) =>
@@ -38,7 +58,7 @@ export default function Chat() {
         : [{ type: "out", message: message }]
     );
     const fetchQuery = "`http://" + IP + encodeURIComponent(message);
-    console.log(IP);
+    // console.log(IP);
     fetch(`http://${IP}/run-script?sentence=${encodeURIComponent(message)}`, {
       method: "GET",
     })
@@ -49,14 +69,17 @@ export default function Chat() {
             ? [...prev, { type: "in", message: data[0] }]
             : [{ type: "in", message: data[0] }]
         );
+        // console.log(data[0])
+        speak(data[0])
+        LoadingState.update((s)=>{s.isLoaded = true})
       })
       .catch((error) => {
         console.error("Error calling the API:", error);
       });
   };
 
-  const speak = () => {
-    const thingToSay = "hai how are you";
+  const speak = (response:string) => {
+    const thingToSay = response
     Speech.VoiceQuality.Enhanced;
     Speech.speak(thingToSay);
   };
@@ -78,20 +101,19 @@ export default function Chat() {
         <TouchableOpacity
           onPress={() => {
             setsendPressed(!sendPressed);
+            LoadingState.update(s=>{s.isLoaded = false})
             
             sendToLLM(message);
             setMessage("")
           }}
           style={[
-            styles.sendButtonStyles,
-            sendPressed
-              ? { backgroundColor: "red" }
-              : { backgroundColor: "green" },
+            styles.sendButtonStyles
           ]}
         >
-          <Ionicons name="send-sharp" size={36} />
+          <SendIconCustom/>
         </TouchableOpacity>
         <TextInput
+          value={message}
           onChangeText={setMessage}
           style={styles.textboxStyles}
         />
@@ -108,7 +130,7 @@ const styles = StyleSheet.create({
   },
   sendButtonStyles: {
     marginBottom: "4%",
-    // backgroundColor: "green",
+    backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: "43%",
@@ -117,6 +139,8 @@ const styles = StyleSheet.create({
   },
   chatsWrapper: {
     flex: 5,
+    // backgroundColor:"red",
+    paddingBottom:"5%"
   },
   BottomView: {
     flex: 1,

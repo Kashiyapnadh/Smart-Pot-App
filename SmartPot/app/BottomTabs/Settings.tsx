@@ -10,13 +10,13 @@ import {
 import { IPAddress } from "@/state/store";
 
 export default function Settings() {
-  const [inputIP, setInputIP] = useState("");
+  const [inputIP, setInputIP] = useState("192.168.1.5:8000");
   const IP = IPAddress.useState((s) => s.IPAddress);
 
   return (
     <View style={styles.backgroundWrapper}>
       <Text style={styles.textStyles}>Enter The IP:</Text>
-      <TextInput onChangeText={setInputIP} style={styles.textinputStyles} />
+      <TextInput onChangeText={setInputIP} value={inputIP} style={styles.textinputStyles} />
       <Pressable
         onPress={() => {
           IPAddress.update((s) => {
