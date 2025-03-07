@@ -32,24 +32,12 @@ export default function Chat() {
   const [message, setMessage] = useState("");
 
   type MessageDataType = { type: string; message: string }[] | null;
-  const [messageData, setMessageData] = useState<MessageDataType>(
-    [
-      { "type": "out", "message": "Hi!" },
-      { "type": "in", "message": "Hey! How's it going?" },
-      { "type": "out", "message": "Pretty good! Just working on a project. You?" },
-      { "type": "in", "message": "Same here! What kind of project?" },
-      { "type": "out", "message": "A mobile app for plant care. Trying to add a chatbot to it." },
-      { "type": "in", "message": "That sounds awesome! Need any help?" },
-      { "type": "out", "message": "Maybe! I'm figuring out how to handle sensor data properly." },
-      { "type": "in", "message": "Are you using any database for storing the data?" },
-      { "type": "out", "message": "Yeah, I'm using Supabase for real-time updates." },
-      { "type": "in", "message": "Nice choice! Are you also integrating notifications?" },
-
-    ]
-    
-    
-
-  );
+  const [messageData, setMessageData] = useState<MessageDataType>([
+    {
+      type: "in",
+      message: "Hello! 😊 I'm here to assist you. How can I help you today?",
+    },
+  ]);
 
   const sendToLLM = async (message: string) => {
     setMessageData((prev) =>
@@ -70,16 +58,18 @@ export default function Chat() {
             : [{ type: "in", message: data[0] }]
         );
         // console.log(data[0])
-        speak(data[0])
-        LoadingState.update((s)=>{s.isLoaded = true})
+        speak(data[0]);
+        LoadingState.update((s) => {
+          s.isLoaded = true;
+        });
       })
       .catch((error) => {
         console.error("Error calling the API:", error);
       });
   };
 
-  const speak = (response:string) => {
-    const thingToSay = response
+  const speak = (response: string) => {
+    const thingToSay = response;
     Speech.VoiceQuality.Enhanced;
     Speech.speak(thingToSay);
   };
@@ -87,36 +77,38 @@ export default function Chat() {
   return (
     <View style={styles.backgroudStyles}>
       <View style={styles.chatsWrapper}>
-
         <FlatList
           renderItem={({ item }) =>
             renderItem({ type: item.type, message: item.message })
-          } 
+          }
           keyExtractor={(item, index) => index.toString()}
           data={messageData}
         />
-
       </View>
       <View style={styles.BottomView}>
-        <TouchableOpacity
-          onPress={() => {
-            setsendPressed(!sendPressed);
-            LoadingState.update(s=>{s.isLoaded = false})
-            
-            sendToLLM(message);
-            setMessage("")
-          }}
-          style={[
-            styles.sendButtonStyles
-          ]}
-        >
-          <SendIconCustom/>
-        </TouchableOpacity>
         <TextInput
           value={message}
           onChangeText={setMessage}
           style={styles.textboxStyles}
         />
+        <TouchableOpacity
+          onPress={() => {
+              if(!(message=="")){
+                setsendPressed(!sendPressed);
+                LoadingState.update((s) => {
+                  s.isLoaded = false;
+                });
+    
+                sendToLLM(message);
+                setMessage("");
+              }
+
+
+          }}
+          style={[styles.sendButtonStyles]}
+        >
+          <SendIconCustom />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -129,28 +121,39 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   sendButtonStyles: {
-    marginBottom: "4%",
+    // marginBottom: "4%",
     backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
-    marginHorizontal: "43%",
+    // marginHorizontal: "43%",
     borderRadius: 40,
+    height: "100%",
+    width: "12%",
+    marginRight: "10%",
     paddingVertical: "2%",
+    // paddingHorizontal:"%",
+    marginLeft: "2%",
   },
   chatsWrapper: {
-    flex: 5,
+    flex: 15,
     // backgroundColor:"red",
-    paddingBottom:"5%"
+    paddingBottom: "5%",
   },
   BottomView: {
     flex: 1,
+    flexDirection: "row",
+    // paddingTop:"10%",
+    // backgroundColor:"red",
   },
   textboxStyles: {
     // backgroundColor:"red",
     // marginBottom:"5%",
+    marginTop:"1%",
     fontSize: 20,
-    height: "35%",
-    marginHorizontal: "10%",
+    height: "85%",
+    width: "70%",
+    // marginHorizontal: "10%",
+    marginLeft: "10%",
     borderRadius: 15,
     paddingLeft: "2%",
     borderWidth: 2,

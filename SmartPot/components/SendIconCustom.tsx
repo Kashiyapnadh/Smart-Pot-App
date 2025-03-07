@@ -6,7 +6,7 @@ export default function SendIconCustom() {
     const DisplayMode = LoadingState.useState(s=>{return s.isLoaded})
     if (DisplayMode) {
         return(
-            <Ionicons name="send-sharp" size={36} />
+            <Ionicons name="send-sharp" size={32} style={{paddingLeft:"1%"}}/>
         )
     } else{
         return(
