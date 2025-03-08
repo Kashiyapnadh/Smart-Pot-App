@@ -1,8 +1,6 @@
-import sys
-import subprocess
 import socket
 from fastapi import FastAPI
-import time
+from prediction import predict  # Ensure correct import
 
 app = FastAPI()
 
@@ -12,18 +10,9 @@ def read_root():
 
 @app.get("/run-script")
 def run_python_script(sentence: str):
-    result = subprocess.run(
-        [sys.executable, 'run_inference.py', '--sentence', sentence],  
-        capture_output=True,
-        text=True
-    )
-    
-    if result.returncode == 0:
-        return {result.stdout}
-    else:
-        return {"message": "Script execution failed", "error": result.stderr}
+    response = predict(sentence)
+    return response
 
-# Hook into FastAPI startup event
 @app.on_event("startup")
 async def startup_event():
     hostname = socket.gethostname()
