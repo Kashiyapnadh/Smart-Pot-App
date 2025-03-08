@@ -18,7 +18,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.anonymous.SmartPot",
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "resize"
     },
     "web": {
       "bundler": "metro",

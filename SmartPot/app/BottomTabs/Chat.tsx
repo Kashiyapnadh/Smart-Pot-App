@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 import * as Speech from "expo-speech";
 import { IPAddress } from "@/state/store";
@@ -54,11 +55,11 @@ export default function Chat() {
       .then((data) => {
         setMessageData((prev) =>
           prev
-            ? [...prev, { type: "in", message: data[0] }]
-            : [{ type: "in", message: data[0] }]
+            ? [...prev, { type: "in", message: data["prediction"] }]
+            : [{ type: "in", message: data["prediction"] }]
         );
-        // console.log(data[0])
-        speak(data[0]);
+        console.log(data)
+        speak(data["prediction"]);
         LoadingState.update((s) => {
           s.isLoaded = true;
         });
@@ -85,7 +86,9 @@ export default function Chat() {
           data={messageData}
         />
       </View>
-      <View style={styles.BottomView}>
+      <KeyboardAvoidingView
+      keyboardVerticalOffset={100}
+      style={styles.BottomView}>
         <TextInput
           value={message}
           onChangeText={setMessage}
@@ -109,7 +112,7 @@ export default function Chat() {
         >
           <SendIconCustom />
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView> 
     </View>
   );
 }
