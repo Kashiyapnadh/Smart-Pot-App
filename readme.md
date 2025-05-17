@@ -1,4 +1,8 @@
-# outline of readme md
+![Cover Image](Assets/cover.png)
+
+# Smart Pot : An intelligent Plant Care Assistant
+
+Smart Pot is an intelligent plant care assistant that uses AI and IoT to help users monitor and interact with their tomato plants. The system combines a YOLOv5-based detection model, ESP32 with environmental sensors, and a mobile app with a built-in chatbot interface.
 
 project description and logo
 technologies used
