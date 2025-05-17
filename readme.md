@@ -23,7 +23,7 @@ Smart Pot is an intelligent plant care assistant that uses AI and IoT to help us
 - [🧠 Tech Stack](#-tech-stack)
 - [📱 Screenshots](#-screenshots)
 - [🛠️ Installation](#️-installation)
-  - [🔌 Backend (Flask Server)](#-backend-flask-server)
+  - [🔌 Backend (FastAPI Server)](#-FastAPI-Server)
   - [🔧 ESP32 (Sensor Upload)](#-esp32-sensor-upload)
   - [🍓 Raspberry Pi (YOLOv5 Deployment)](#-raspberry-pi-yolov5-deployment)
   - [📲 Mobile App (React Native)](#-mobile-app-react-native)
@@ -87,8 +87,48 @@ Smart Pot is an intelligent plant care assistant that uses AI and IoT to help us
 
 
 ## 🛠️ Installation
+>⚠️ **Warning**: This project has been tested with Python 3.11. Functionality with other Python versions is not guaranteed — your mileage may vary.
 
-### 🔌 Backend (Flask Server)
+>💡 **Recommendation**: It is strongly recommended to create a [Python virtual environment](https://docs.python.org/3/library/venv.html) before installing dependencies to avoid version conflicts and maintain a clean setup.
+
+### 💬 FastAPI Server (Chatbot)
+The chatbot backend uses FastAPI to serve an LLM-based model. You can either train the model yourself or download a pre-trained version.
+
+#### 🧠 Option 1: Train the Model Yourself
+1. Navigate to the `chat-bot-server` directory:
+```
+cd chat-bot-server
+```
+2. Install the required dependencies:
+```
+pip install -r requirements.txt
+```
+3. Run the training script to generate your own LLM model:
+```
+python train_llm.py
+```
+>⏱️ **Note**: Training may take a while depending on your hardware.
+
+#### 📦 Option 2: Download Pre-trained Model
+1. Navigate to the `chat-bot-server` directory:
+```
+cd chat-bot-server
+```
+2. Install the required dependencies:
+```
+pip install -r requirements.txt
+```
+3. Run the download script to fetch a pre-trained model:
+```
+python download.py
+```
+#### 🚀 Run the FastAPI Server
+Once the model is ready (trained or downloaded), start the FastAPI server:
+```
+uvicorn main:app --host 0.0.0.0 --reload
+```
+The API will be available at `http://localhost:8000`.
+
 ### 🔧 ESP32 (Sensor Upload)
 ### 🍓 Raspberry Pi (YOLOv5 Deployment)
 ### 📲 Mobile App (React Native)
@@ -188,7 +228,3 @@ now the model is downloaded and and ready to use
   uvicorn main:app --host 0.0.0.0 --reload
 
     now llm model is running in local host.
-
-
-## Section 2 Mobile Application 
-    
