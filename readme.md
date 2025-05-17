@@ -2,7 +2,18 @@
 
 <h1 align="center">Smart Pot : An intelligent Plant Care Assistant </h1>
 
-"here comes the badges"
+<div align="center">
+
+[![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage")
+<a href="https://www.linux.org/" title="Go to Linux homepage"><img src="https://img.shields.io/badge/OS-Linux-blue?logo=linux&logoColor=white" alt="OS - Linux"></a>
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/binoy-ce/Smart-Pot-App)
+<a href="https://python.org" title="Go to Python homepage"><img src="https://img.shields.io/badge/Python-%3E=3.11-blue?logo=python&logoColor=white" alt="Made with Python"></a>
+<a href="https://nodejs.org" title="Go to Node.js homepage"><img src="https://img.shields.io/badge/Node.js-%3E=23.8.0-blue?logo=node.js&logoColor=white" alt="Made with Node.js"></a>
+
+
+</div>
+
 
 Smart Pot is an intelligent plant care assistant that uses AI and IoT to help users monitor and interact with their tomato plants. The system combines a YOLOv5-based detection model, ESP32 with environmental sensors, and a mobile app with a built-in chatbot interface.
 
@@ -82,7 +93,7 @@ Smart Pot is an intelligent plant care assistant that uses AI and IoT to help us
 ### 🍓 Raspberry Pi (YOLOv5 Deployment)
 ### 📲 Mobile App (React Native)
 ```
-cd mobile-app
+cd SmartPot
 npm install
 npx expo start
 ```
@@ -118,22 +129,33 @@ npx expo start
 
 ## 📁 Folder Structure
 
-SmartPot/
-├── backend/
-│   ├── app.py
-│   └── requirements.txt
-├── esp32/
-│   └── esp32_sensor.ino
-├── raspberry-pi/
-│   ├── detect.py
-│   └── yolov5_model/
-├── mobile-app/
-│   ├── App.js
-│   └── components/
-├── docs/
-│   └── testing.md
-├── README.md
+<img src="./Assets/folder strcuture.png" alt="folder structure"  width="200" >
 
+## 📈 Future Improvements
+
+- 🌿 **Fertilizer Recommendations**
+Analyze plant growth stages and environmental data to suggest personalized fertilization schedules, improving yield and plant health.
+
+- 🧪 **Nutrient Deficiency Detection**
+Use computer vision to detect visual signs of nutrient stress (e.g., yellowing leaves) and alert users with corrective suggestions.
+
+- 🌐 **Multi-Plant Support**
+Allow users to manage and monitor multiple smart pots within the same app, each with unique sensor profiles and chat histories.
+
+- 📤 **Data Export and Reports**
+Enable users to generate monthly care logs, watering history, and sensor trends in downloadable PDF/CSV formats.
+
+- 🔐 **User Profiles & Authentication**
+Implement secure login and personalized dashboards, supporting multiple users per pot (e.g., families or research teams).
+
+## 👨‍💻 Authors
+- **Binoy C E** – App Developer
+- **Alvis Sajith** - Backend Developer
+- **AJ Kashyapnath** - AI/ML Developer
+- **Ayush Baiju** - IOT Setup
+
+## 📜 License
+This project is licensed under the MIT License. You are free to use, modify, and distribute it with attribution. :)
 
 ## Section 1 setting up the LLM-Model.
 
