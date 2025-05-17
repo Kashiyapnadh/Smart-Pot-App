@@ -23,7 +23,7 @@ Smart Pot is an intelligent plant care assistant that uses AI and IoT to help us
 - [🧠 Tech Stack](#-tech-stack)
 - [📱 Screenshots](#-screenshots)
 - [🛠️ Installation](#️-installation)
-  - [🔌 Backend (FastAPI Server)](#-FastAPI-Server)
+  - [💬 FastAPI Server (Chatbot)](#-fastapi-server-chatbot)
   - [🔧 ESP32 (Sensor Upload)](#-esp32-sensor-upload)
   - [🍓 Raspberry Pi (YOLOv5 Deployment)](#-raspberry-pi-yolov5-deployment)
   - [📲 Mobile App (React Native)](#-mobile-app-react-native)
@@ -130,13 +130,88 @@ uvicorn main:app --host 0.0.0.0 --reload
 The API will be available at `http://localhost:8000`.
 
 ### 🔧 ESP32 (Sensor Upload)
+
+1. Install the Arduino IDE  
+   Download it from [https://www.arduino.cc/en/software](https://www.arduino.cc/en/software).
+
+2. Install Required Libraries  
+   Open the Arduino IDE and install the following libraries through the Library Manager:
+
+-  OneWire
+-  Dallas Temperature
+-  Adafruit Unified Sensor
+-  DHT sensor library
+-  WiFi (built-in for ESP32)
+-  Firebase ESP Client
+
+>💡 Tip: You can use the Library Manager in Arduino IDE (Sketch > Include Library > Manage Libraries) to find and install them easily.
+
+#### 🔌 Flashing the ESP32
+1. Connect your ESP32 board via USB.
+
+2. Open the appropriate .ino file from the esp32/ directory.
+
+3. Select your board and port from Tools > Board and Tools > Port.
+
+4. Click Upload to flash the code to the board.
+
+Once uploaded, the ESP32 will begin reading sensor values and uploading them to your Firebase Realtime Database.
+
+
 ### 🍓 Raspberry Pi (YOLOv5 Deployment)
+This module runs a modified YOLOv5 model on the Raspberry Pi to detect tomato ripeness and upload the results to Firebase.
+#### 🎓 Model Training (Google Colab)
+If you haven’t trained your own model yet, use the following [Google Colab notebook](https://colab.research.google.com/drive/1QQZTsLaV2Zb5Jfy4YGsvTl3xIW4toOw9?usp=sharing).
+
+#### 🚀 Deployment on Raspberry Pi
+1. Install Raspberry Pi OS
+Follow the official installation guide here:<br>
+👉 https://www.raspberrypi.com/software/
+
+2. Copy Files to the Pi <br>
+Transfer the following files to the home directory (/home/pi/) of your Raspberry Pi:
+
+- best.pt (the trained YOLOv5 model)
+
+- detect.py (your customized inference script)
+
+You can use scp, USB, or any file transfer method.
+
+3. Modified detect.py <br>
+This version of detect.py is adapted from the original YOLOv5 repository. It processes each frame, performs detection, and sends results to Firebase in real time.
+
+#### 🧪 Running the Detection Script
+Once setup is complete, you can run the detection script with:
+```
+python3 detect.py
+```
+Make sure your Raspberry Pi is connected to the internet, and the script will begin analyzing video frames and updating Firebase with detection results.
+
+
+>💡 **Tip**: After the initial setup, you can run detect.py remotely via SSH without needing a connected display.
+
 ### 📲 Mobile App (React Native)
+This is the front-end of the Smart Pot system. It connects with Firebase for sensor data, a FastAPI server for the chatbot, and displays real-time plant information.
+
+#### 🧰 Prerequisites
+- Node.js (LTS version recommended)
+- Expo CLI
+
+#### 📦 Setup Instructions
+1. Navigate to the app directory:
 ```
 cd SmartPot
+```
+2. Install dependencies:
+```
 npm install
+```
+3. Start the Expo development server:
+```
 npx expo start
 ```
+#### ⚙️ Environment Configuration
+Make sure your backend URLs (Firebase & FastAPI server) are correctly set in the config file (usually .env or a constants file). Update IP addresses if you’re running the backend locally on a different machine
 
 ## 📊 Project Architecture
 ![Architecture Image](Assets/architecture.png)
@@ -196,35 +271,3 @@ Implement secure login and personalized dashboards, supporting multiple users pe
 
 ## 📜 License
 This project is licensed under the MIT License. You are free to use, modify, and distribute it with attribution. :)
-
-## Section 1 setting up the LLM-Model.
-
-option one download pretrained model.
-option two train it yourself
-
- python 3.11 is tested + discsalimer for untested versions
-    
-    
-    create virtual env name chatbotenv
-    and activate the virtual env
-    navigate to chat-bot-server folder
-    install requiremrnts .txt
-    then 
-
-option 1:
-
-
-    run train_llm.py
-
-option 2:
-
-    download the pre trained model by running the script download.py
-
-now the model is downloaded and and ready to use
-
-    start the fast api server that accepts the queries from and forwards to it the llm model which then returns the output.
-  // word it better later
-  using this command
-  uvicorn main:app --host 0.0.0.0 --reload
-
-    now llm model is running in local host.
