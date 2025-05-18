@@ -55,11 +55,12 @@ export default function Chat() {
       .then((data) => {
         setMessageData((prev) =>
           prev
-            ? [...prev, { type: "in", message: data["prediction"] }]
-            : [{ type: "in", message: data["prediction"] }]
+            ? [...prev, { type: "in", message: data }]
+            : [{ type: "in", message: data }]
         );
         console.log(data)
-        speak(data["prediction"]);
+        // console.log(messageData);
+        speak(data);
         LoadingState.update((s) => {
           s.isLoaded = true;
         });

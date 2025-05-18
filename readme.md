@@ -82,9 +82,12 @@ Smart Pot is an intelligent plant care assistant that uses AI and IoT to help us
 ---
 
 ## 📱 Screenshots
-
-"screenshots to be posted here"
-
+<div align="center" >
+<img src="./Assets/login.png" height="300" >  
+<img src="./Assets/predictions.png" height="300" >
+<img src="./Assets/chatbot.png" height="300">
+<img src="./Assets/settings.png" height="300">
+</div>
 
 ## 🛠️ Installation
 >⚠️ **Warning**: This project has been tested with Python 3.11. Functionality with other Python versions is not guaranteed — your mileage may vary.
@@ -240,7 +243,97 @@ Make sure your backend URLs (Firebase & FastAPI server) are correctly set in the
 </table>
 
 ### Yolov5 Model
+<table border="1">
+  <tr>
+    <th>Test Image</th>
+    <th>Result</th>
+    <th>Confidence</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Early Blight</td>
+    <td>Detected</td>
+    <td>0.88</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Healthy</td>
+    <td>Detected</td>
+    <td>0.94</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Late Blight</td>
+    <td>Detected</td>
+    <td>0.90</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Leaf Miner</td>
+    <td>Detected</td>
+    <td>0.85</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Leaf Mold</td>
+    <td>Detected</td>
+    <td>0.87</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Mosaic Virus</td>
+    <td>Detected</td>
+    <td>0.91</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Septoria</td>
+    <td>Detected</td>
+    <td>0.89</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Spider Mites</td>
+    <td>Detected</td>
+    <td>0.86</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Yellow Leaf Curl Virus</td>
+    <td>Detected</td>
+    <td>0.93</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Other Plant</td>
+    <td>Not Detected</td>
+    <td>-</td>
+    <td>✅</td>
+  </tr>
+</table>
+
 ### Watering System
+
+<table border="1">
+  <tr>
+    <th>Condition</th>
+    <th>Moisture (%)</th>
+    <th>Action Taken</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>Sufficient Water</td>
+    <td>&gt; 30%</td>
+    <td>No action</td>
+    <td>✅</td>
+  </tr>
+  <tr>
+    <td>Low Moisture</td>
+    <td>&le; 30%</td>
+    <td>Pump activated</td>
+    <td>✅</td>
+  </tr>
+</table>
 
 ## 📁 Folder Structure
 
