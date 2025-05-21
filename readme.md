@@ -186,7 +186,7 @@ This version of detect.py is adapted from the original YOLOv5 repository. It pro
 #### 🧪 Running the Detection Script
 Once setup is complete, you can run the detection script with:
 ```
-python3 detect.py
+python3 detect.py --weights best.pt --source 0
 ```
 Make sure your Raspberry Pi is connected to the internet, and the script will begin analyzing video frames and updating Firebase with detection results.
 
